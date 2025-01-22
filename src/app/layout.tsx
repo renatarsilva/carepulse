@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 import { cn } from "../../lib/utils";
+import { ThemeProvider } from "next-themes";
 
 const fontSans = Plus_Jakarta_Sans({
   variable: "--font-geist-sans",
@@ -24,6 +25,14 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         {children}
       </body>
     </html>
