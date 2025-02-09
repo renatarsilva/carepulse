@@ -10,6 +10,7 @@ import SubmitButton from "../ui/submitButton";
 import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -42,12 +43,14 @@ const PatientForm = () => {
     setIsLoading(true);
 
     try {
+      console.log("clique");
       const userData = { name, email, phone };
-      const user = await CreateUser(UserData);
+      const user = await createUser(userData);
       if (user) router.push(`/patients/${user.$id}/register`);
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -55,7 +58,9 @@ const PatientForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
           <h1 className="header">Hi there!👋</h1>
-          <p className="text-dark-700">Schedule your first appointment.</p>
+          <p className="text-dark-700 selection:bg-red-500">
+            Schedule your first appointment.
+          </p>
         </section>
 
         <CustomFormField
