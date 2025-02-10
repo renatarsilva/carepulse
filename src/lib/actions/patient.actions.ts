@@ -3,6 +3,7 @@ import { ID, Query, Storage } from "node-appwrite";
 import {
   BUCKET_ID,
   DATABASE_ID,
+  databases,
   ENDPOINT,
   PATIENT_COLLECTION_ID,
   PROJECT_ID,

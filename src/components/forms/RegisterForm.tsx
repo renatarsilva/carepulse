@@ -39,6 +39,7 @@ const RegisterForm = ({ user }: { user: User }) => {
   });
 
   async function onSubmit(values: z.infer<typeof PatientFormValidation>) {
+    console.log("Entrou aqui");
     setIsLoading(true);
 
     let formData;
@@ -161,7 +162,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="Occupation"
+            name="occupation"
             label="Occupation"
             placeholder="Software Engineer"
           />
