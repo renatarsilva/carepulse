@@ -52,6 +52,8 @@ const RegisterForm = ({ user }: { user: User }) => {
         type: values.identificationDocument[0].type,
       });
 
+      console.log(values);
+
       formData = new FormData();
       formData.append("blobFile", blobFile);
       formData.append("fileName", values.identificationDocument[0].name);

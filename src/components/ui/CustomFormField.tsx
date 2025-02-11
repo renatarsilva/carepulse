@@ -26,14 +26,14 @@ import { Checkbox } from "./checkbox";
 interface CustomProps {
   control: Control<any>;
   fieldType: FormFieldType;
-  name: String;
-  label?: String;
-  placeholder?: String;
-  iconSrc?: String;
-  iconAlt?: String;
-  disabled?: Boolean;
-  dateFormat?: String;
-  showTimeSelect?: Boolean;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  iconSrc?: string;
+  iconAlt?: string;
+  disabled?: boolean;
+  dateFormat?: string;
+  showTimeSelect?: boolean;
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
 }
@@ -163,14 +163,14 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 };
 
 const CustomFormField = (props: CustomProps) => {
-  const { control, fieldType, name, label } = props;
+  const { control, name, label } = props;
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
         <FormItem className="flex-1">
-          {fieldType !== FormFieldType.CHECKBOX && label && (
+          {props.fieldType !== FormFieldType.CHECKBOX && label && (
             <FormLabel>{label}</FormLabel>
           )}
 
