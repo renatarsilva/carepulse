@@ -5,7 +5,7 @@ import { getUser } from "@/lib/actions/patient.actions";
 import PatientForm from "@/components/forms/PatientForm";
 
 const Register = async () => {
-  const user = await getUser("userId");
+  // const user = await getUser("userId");
 
   return (
     <div className="flex h-screen max-h-screen">
