@@ -64,7 +64,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         ...values,
         userId: user.$id,
         birthDate: new Date(values.birthDate),
-        identificationDocument: FormData,
+        identificationDocument: formData,
       };
 
       // @ts-ignore
