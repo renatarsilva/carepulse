@@ -65,6 +65,9 @@ export const registerPatient = async ({
       console.log(inputFile);
       file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
     }
+
+    console.log({ gender: patient.gender });
+
     const newPatient = await databases.createDocument(
       DATABASE_ID!,
       PATIENT_COLLECTION_ID!,
