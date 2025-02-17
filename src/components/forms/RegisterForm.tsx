@@ -14,7 +14,6 @@ import { createUser, registerPatient } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import {
-  Doctors,
   GenderOptions,
   IdentificationTypes,
   PatientFormDefaultValues,
@@ -91,6 +90,8 @@ const RegisterForm = ({ user }: { user: User }) => {
           <div className="mb-9 space-y-1"></div>
           <h2 className="sub-header ">Personal Information</h2>
         </section>
+
+        {/* name */}
         <CustomFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
@@ -100,6 +101,8 @@ const RegisterForm = ({ user }: { user: User }) => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
+
+        {/* email & phone */}
         <div className="flex flex-col gap-6 xl:flex-row">
           <CustomFormField
             fieldType={FormFieldType.INPUT}
@@ -119,6 +122,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             placeholder="(555) 123-4567"
           />
         </div>
+
+        {/* birthDate & gender */}
         <div className="flex flex-col gap-6 xl:flex-row">
           <CustomFormField
             fieldType={FormFieldType.DATE_picker}
@@ -152,6 +157,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             )}
           />
         </div>
+
+        {/* address & occupation */}
         <div className="flex flex-col gap-6 xl:flex-row">
           <CustomFormField
             fieldType={FormFieldType.INPUT}
@@ -169,6 +176,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             placeholder="Software Engineer"
           />
         </div>
+
+        {/* Emergency Contact Name & Emergency Contact Number */}
         <div className="flex flex-col gap-6 xl:flex-row">
           <CustomFormField
             fieldType={FormFieldType.INPUT}
@@ -186,30 +195,29 @@ const RegisterForm = ({ user }: { user: User }) => {
             placeholder="(555) 123-4567"
           />
         </div>
+
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
             <h2 className="sub-header ">Medical Information</h2>
           </div>
         </section>
 
+        {/* PRIMARY CARE PHYSICIAN */}
         <CustomFormField
           fieldType={FormFieldType.SELECT}
           control={form.control}
           name="primaryPhysician"
-          label="Primary Physician"
+          label="Primary care physician"
           placeholder="Select a physician"
         >
-          {Doctors.map((doctor, index) => (
-            <SelectItem key={index} value={doctor.name}>
-              <div
-                className="flex 
-              cursor-pointer items-center gap-2"
-              >
+          {Doctors.map((doctor, i) => (
+            <SelectItem key={doctor.name + i} value={doctor.name}>
+              <div className="flex cursor-pointer items-center gap-2">
                 <Image
                   src={doctor.image}
                   width={32}
                   height={32}
-                  alt={doctor.name}
+                  alt="doctor"
                   className="rounded-full border border-dark-500"
                 />
                 <p>{doctor.name}</p>
@@ -218,6 +226,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           ))}
         </CustomFormField>
 
+        {/* INSURANCE & POLICY NUMBER */}
         <div className="flex flex-col gap-6 xl:flex-row">
           <CustomFormField
             fieldType={FormFieldType.INPUT}

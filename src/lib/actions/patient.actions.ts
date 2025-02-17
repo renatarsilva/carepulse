@@ -39,9 +39,22 @@ export const createUser = async (user: CreateUserParams) => {
 
 export const getUser = async (userId: string) => {
   try {
-    console.log(userId);
     const user = await users.get(userId);
     return parseStringify(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPatient = async (userId: string) => {
+  try {
+    const patients = await databases.listDocuments(
+      DATABASE_ID!,
+      PATIENT_COLLECTION_ID!,
+      [Query.equal("userId", userId)]
+    );
+
+    return parseStringify(patients.documents[0]);
   } catch (error) {
     console.log(error);
   }
@@ -65,8 +78,6 @@ export const registerPatient = async ({
       console.log(inputFile);
       file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
     }
-
-    console.log({ gender: patient.gender });
 
     const newPatient = await databases.createDocument(
       DATABASE_ID!,
