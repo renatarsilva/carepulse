@@ -29,7 +29,7 @@ const AppointmentForm = ({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const AppointmentformValidation = getAppointmentSchema(type);
+  const AppointmentFormValidation = getAppointmentSchema(type);
 
   const form = useForm<z.infer<typeof AppointmentFormValidation>>({
     resolver: zodResolver(AppointmentFormValidation),
@@ -67,6 +67,7 @@ const AppointmentForm = ({
           schedule: new Date(values.schedule),
           reason: values.reason!,
           status: status as Status,
+          note: values.note,
         };
         const appointment = await CreateAppointment(appointmentData);
 
