@@ -60,6 +60,8 @@ const AppointmentForm = ({
 
     try {
       if (type === "create" && patientId) {
+        console.log("IM HERE");
+
         const appointmentData = {
           userId,
           patient: patientId,
