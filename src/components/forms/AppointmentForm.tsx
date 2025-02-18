@@ -16,6 +16,7 @@ import { Doctors } from "../../../constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
 import { CreateAppointment } from "@/lib/actions/appointment.actions";
+import NewAppointment from "@/app/patients/[userId]/new-appointment/page";
 
 const AppointmentForm = ({
   userId,
@@ -77,8 +78,9 @@ const AppointmentForm = ({
 
         if (appointment) {
           form.reset();
-          router.push(`/patients/${userId}/new-appointment/sucess?appointmentId=$
-          {appointment.$id}`);
+          router.push(
+            `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
+          );
         }
       }
     } catch (error) {
