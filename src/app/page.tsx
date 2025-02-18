@@ -1,15 +1,15 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import { getUser } from "@/lib/actions/patient.actions";
 import PatientForm from "@/components/forms/PatientForm";
+import PasskeyModal from "@/components/PasskeyModal";
 
-const Register = async () => {
-  // const user = await getUser("userId");
+export default async function Home({ searchParams }: SearchParamProps) {
+  const isAdmin = searchParams?.admin === "true";
 
   return (
     <div className="flex h-screen max-h-screen">
-      {/* TODO: OTP Verification | PasskeyModal*/}
+      {isAdmin && <PasskeyModal />}
 
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
@@ -43,5 +43,4 @@ const Register = async () => {
       />
     </div>
   );
-};
-export default Register;
+}
