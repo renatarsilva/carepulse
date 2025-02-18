@@ -58,6 +58,8 @@ const AppointmentForm = ({
         break;
     }
 
+    console.log("BEFORE THE TYPE", type);
+
     try {
       if (type === "create" && patientId) {
         console.log("IM HERE");
@@ -76,7 +78,7 @@ const AppointmentForm = ({
         if (appointment) {
           form.reset();
           router.push(`/patients/${userId}/new-appointment/sucess?appointmentId=$
-          {appointment.id}`);
+          {appointment.$id}`);
         }
       }
     } catch (error) {

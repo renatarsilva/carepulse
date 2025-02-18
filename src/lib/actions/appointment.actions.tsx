@@ -1,3 +1,4 @@
+"use server";
 import { ID } from "node-appwrite";
 import { parseStringify } from "../../../lib/utils";
 import {
