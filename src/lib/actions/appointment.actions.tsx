@@ -9,6 +9,7 @@ import {
 import { Appointment } from "../../../types/appwrite.types";
 import { error } from "console";
 import { revalidatePath } from "next/cache";
+import { scheduler } from "timers/promises";
 
 export const CreateAppointment = async (
   appointment: CreateAppointmentParams
@@ -49,7 +50,7 @@ export const getRecentAppointmentList = async () => {
     );
 
     const initialCounts = {
-      scheduleCount: 0,
+      scheduledCount: 0,
       pendingCount: 0,
       cancelledCount: 0,
     };
@@ -57,7 +58,7 @@ export const getRecentAppointmentList = async () => {
     const counts = (appointments.documents as Appointment[]).reduce(
       (acc, appointment) => {
         if (appointment.status === "scheduled") {
-          acc.scheduleCount += 1;
+          acc.scheduledCount += 1;
         } else if (appointment.status === "pending") {
           acc.pendingCount += 1;
         } else if (appointment.status === "cancelled") {
