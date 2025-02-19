@@ -5,18 +5,12 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import StatusBadge from "../StatusBadge";
 import { formatDateTime } from "../../../lib/utils";
 import { Doctors } from "../../../constants";
 import Image from "next/image";
+import AppointmentModal from "../AppointmentModal";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -81,9 +75,23 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     id: "actions",
-    header: 
-    cell: ({ row }) => {
-      
+    header: () => <div className="pl-4">Actions</div>,
+    cell: ({ row: { original: data } }) => {
+      return (
+        <div className="flex gap-1">
+          <AppointmentModal
+            type="schedule"
+            patientID={data?.patient?.$id}
+            appointmentId={data}
+          />
+
+          <AppointmentModal
+            type="cancel"
+            patientID={data?.patient?.$id}
+            appointmentId={data}
+          />
+        </div>
+      );
     },
   },
 ];

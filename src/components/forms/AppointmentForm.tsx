@@ -15,17 +15,26 @@ import { FormFieldType } from "./PatientForm";
 import { Doctors } from "../../../constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
-import { CreateAppointment } from "@/lib/actions/appointment.actions";
+import {
+  CreateAppointment,
+  updateAppointment,
+} from "@/lib/actions/appointment.actions";
 import NewAppointment from "@/app/patients/[userId]/new-appointment/page";
+import { Appointment } from "../../../types/appwrite.types";
+import { BookType } from "lucide-react";
 
 const AppointmentForm = ({
   userId,
   patientId,
   type,
+  appointment,
+  setOpen,
 }: {
   userId: string;
   patientId: string;
   type: "create" | "cancel" | "schedule";
+  appointment?: Appointment;
+  setOpen: (open: boolean) => void;
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -59,12 +68,8 @@ const AppointmentForm = ({
         break;
     }
 
-    console.log("BEFORE THE TYPE", type);
-
     try {
       if (type === "create" && patientId) {
-        console.log("IM HERE");
-
         const appointmentData = {
           userId,
           patient: patientId,
@@ -81,6 +86,25 @@ const AppointmentForm = ({
           router.push(
             `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
           );
+        }
+      } else {
+        const appointmentToUpdate = {
+          userId,
+          appointmentId: appointment?.$id!,
+          appointment: {
+            primaryPhysician: values?.primaryPhysician,
+            schedule: new Date(values?.schedule),
+            status: status as Status,
+            cancellation: values?.cancellationReason,
+          },
+          type,
+        };
+
+        const updateAppointment = await updateAppointment(appointmentToUpdate);
+
+        if (updateAppointment) {
+          setOpen && setOpen(false);
+          form.reset();
         }
       }
     } catch (error) {
