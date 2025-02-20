@@ -1,5 +1,5 @@
 "use server";
-import { ID, Query, Storage } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import {
   BUCKET_ID,
   DATABASE_ID,
@@ -11,7 +11,6 @@ import {
   users,
 } from "../appwrite.config";
 import { parseStringify } from "../../../lib/utils";
-import { useAmp } from "next/amp";
 import { InputFile } from "node-appwrite/file";
 
 // import { InputFile } from "node-appwrite/file";

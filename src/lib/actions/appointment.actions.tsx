@@ -7,7 +7,6 @@ import {
   databases,
 } from "../appwrite.config";
 import { Appointment } from "../../../types/appwrite.types";
-import { error } from "console";
 import { revalidatePath } from "next/cache";
 import { scheduler } from "timers/promises";
 
