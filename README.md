@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CarePulse ✨
 
-## Getting Started
+CarePulse is an online medical appointment scheduling platform 🏥, designed to simplify and streamline the process of booking doctor consultations. Built with modern technologies, CarePulse provides an intuitive, user-friendly interface that ensures a seamless experience for both patients and healthcare professionals. 💻📅
 
-First, run the development server:
+<img center="right" src="./public/carepulse.png"  />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **🗓️ Easy Appointment Scheduling**: Users can book and manage their medical appointments effortlessly.
+- **👨‍⚕️ Doctor Profiles**: Access detailed information about healthcare professionals.
+- **🎨 Themed UI**: Light and dark mode support for better accessibility.
+- **🔒 Secure Authentication**: Ensures patient data security and privacy.
+- **📱 Responsive Design**: Works across various devices including mobile, tablet, and desktop.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+CarePulse is built using the latest web development technologies:
 
-## Learn More
+- **🖥️ Frontend & Framework**:
 
-To learn more about Next.js, take a look at the following resources:
+  - ⚡ Next.js 15.1.5 (with TurboPack for improved performance)
+  - ⚛️ React 19.0.0
+  - 🎨 Tailwind CSS for styling
+  - 🏗️ Radix UI components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **📑 Form Handling & Validation**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  - 📝 React Hook Form
+  - ✅ Zod (for schema validation)
+  - 📞 React Phone Number Input
+  - 📆 React DatePicker
 
-## Deploy on Vercel
+- **🎨 UI & Icons**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - 🖌️ Lucide React
+  - 💫 Tailwind CSS Animations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **📊 State Management & Data Handling**:
+
+  - 📋 Tanstack React Table (for handling table data)
+
+- **🌐 Backend & API**:
+
+  - 🔗 Appwrite (Node SDK)
+
+- **⚙️ Development Tools**:
+  - 💡 TypeScript 5
+  - 🔍 ESLint & Prettier
+  - 🎨 PostCSS
+
+## 🏗️ Installation
+
+To run the project locally, follow these steps:
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/carepulse.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd carepulse
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
+5. Open `http://localhost:3000` in your browser. 🌍
+
+## 🤝 Contributing
+
+We welcome contributions! 🎉 Feel free to fork the repository and submit pull requests with improvements or bug fixes.
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+Enjoy using **CarePulse**! 🚀
