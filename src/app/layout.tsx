@@ -5,7 +5,6 @@ import { cn } from "../../lib/utils";
 import { ThemeProvider } from "next-themes";
 
 const fontSans = Plus_Jakarta_Sans({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",

@@ -5,10 +5,9 @@ import { Doctors } from "../../../../../../constants";
 import { formatDateTime } from "../../../../../../lib/utils";
 import { Button } from "@/components/ui/button";
 
-const Success = async ({
-  params: { userId },
-  searchParams,
-}: SearchParamProps) => {
+const Success = async (props: SearchParamProps) => {
+  const { userId } = await props.params;
+  const searchParams = await props.searchParams;
   const appointmentId = (searchParams?.appointmentId as string) || "";
   const appointment = await getAppointment(appointmentId);
 
