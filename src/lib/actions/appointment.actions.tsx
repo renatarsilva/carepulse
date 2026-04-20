@@ -52,17 +52,27 @@ export const getRecentAppointmentList = async () => {
       cancelledCount: 0,
     };
 
-    const counts = appointments.reduce((acc: { scheduledCount: number; pendingCount: number; cancelledCount: number }, appointment: any) => {
-      if (appointment.status === "scheduled") {
-        acc.scheduledCount += 1;
-      } else if (appointment.status === "pending") {
-        acc.pendingCount += 1;
-      } else if (appointment.status === "cancelled") {
-        acc.cancelledCount += 1;
-      }
+    const counts = appointments.reduce(
+      (
+        acc: {
+          scheduledCount: number;
+          pendingCount: number;
+          cancelledCount: number;
+        },
+        appointment: any
+      ) => {
+        if (appointment.status === "scheduled") {
+          acc.scheduledCount += 1;
+        } else if (appointment.status === "pending") {
+          acc.pendingCount += 1;
+        } else if (appointment.status === "cancelled") {
+          acc.cancelledCount += 1;
+        }
 
-      return acc;
-    }, initialCounts);
+        return acc;
+      },
+      initialCounts
+    );
 
     const data = {
       totalCount: appointments.length,

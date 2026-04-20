@@ -16,7 +16,8 @@ const Admin = async () => {
     appointments = await getRecentAppointmentList();
   } catch (err) {
     console.error("Error fetching appointments:", err);
-    error = "Failed to load appointments. Please check your database connection.";
+    error =
+      "Failed to load appointments. Please check your database connection.";
     appointments = {
       totalCount: 0,
       scheduledCount: 0,
@@ -47,7 +48,8 @@ const Admin = async () => {
           <p className="font-bold">Error</p>
           <p>{error}</p>
           <p className="text-sm mt-2">
-            Make sure PostgreSQL is running and DATABASE_URL is correctly configured in your .env file.
+            Make sure PostgreSQL is running and DATABASE_URL is correctly
+            configured in your .env file.
           </p>
         </div>
       )}

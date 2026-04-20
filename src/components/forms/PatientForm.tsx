@@ -42,12 +42,23 @@ const PatientForm = () => {
     setIsLoading(true);
 
     try {
-      console.log("clique");
+      console.log("Getting started with:", { name, email, phone });
       const userData = { name, email, phone };
       const user = await createUser(userData);
-      if (user) router.push(`/patients/${user.id}/register`);
-    } catch (error) {
-      console.log(error);
+      console.log("User created:", user);
+      if (user?.id) {
+        router.push(`/patients/${user.id}/register`);
+      } else {
+        console.error("No user ID returned");
+        form.setError("root", {
+          message: "Failed to create user account. Please try again.",
+        });
+      }
+    } catch (error: any) {
+      console.error("Error in form submission:", error);
+      form.setError("root", {
+        message: error?.message || "An error occurred. Please try again.",
+      });
     }
     setIsLoading(false);
   }
@@ -89,6 +100,12 @@ const PatientForm = () => {
           label="Phone number"
           placeholder="(555) 123-4567"
         />
+
+        {form.formState.errors.root && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            <p>{form.formState.errors.root.message}</p>
+          </div>
+        )}
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
