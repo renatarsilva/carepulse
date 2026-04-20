@@ -71,7 +71,10 @@ export const registerPatient = async ({
     const newPatient = await prisma.patient.create({
       data: {
         ...patient,
-        birthDate: birthDate instanceof Date ? birthDate.toISOString().split('T')[0] : birthDate,
+        birthDate:
+          birthDate instanceof Date
+            ? birthDate.toISOString().split("T")[0]
+            : birthDate,
         identificationDocumentUrl: identificationDocumentUrl || null,
       },
     });
