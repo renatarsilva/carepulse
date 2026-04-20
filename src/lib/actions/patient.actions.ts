@@ -5,7 +5,7 @@ import { parseStringify } from "../../../lib/utils";
 export const createUser = async (user: CreateUserParams) => {
   try {
     console.log("Creating user:", user.email);
-    
+
     const existingUser = await prisma.user.findUnique({
       where: { email: user.email },
     });
@@ -27,7 +27,9 @@ export const createUser = async (user: CreateUserParams) => {
     return parseStringify(newUser);
   } catch (error: any) {
     console.error("Error creating user:", error);
-    throw new Error(`Failed to create user: ${error?.message || 'Unknown error'}`);
+    throw new Error(
+      `Failed to create user: ${error?.message || "Unknown error"}`
+    );
   }
 };
 
@@ -87,6 +89,8 @@ export const registerPatient = async ({
     return parseStringify(newPatient);
   } catch (error: any) {
     console.error("Error registering patient:", error);
-    throw new Error(`Failed to register patient: ${error?.message || 'Unknown error'}`);
+    throw new Error(
+      `Failed to register patient: ${error?.message || "Unknown error"}`
+    );
   }
 };
