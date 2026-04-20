@@ -15,6 +15,9 @@ COPY . .
 # Generate Prisma Client
 RUN npx prisma generate
 
+# Run database migrations
+RUN npx prisma migrate deploy
+
 # Build the application
 RUN npm run build
 
@@ -29,6 +32,7 @@ COPY package.json package-lock.json ./
 # Install only production dependencies
 RUN npm ci --only=production
 
+COPY --from=builder /app/prisma ./prisma
 # Copy built application from builder
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
