@@ -42,10 +42,10 @@ const AppointmentForm = ({
     defaultValues: {
       primaryPhysician: appointment ? appointment?.primaryPhysician : "",
       schedule: appointment
-        ? new Date(appointment?.schedule)
+        ? new Date(appointment?.appointmentDate || new Date())
         : new Date(Date.now()),
       reason: appointment ? appointment?.reason : "",
-      note: appointment?.note || "",
+      note: appointment?.notes || "",
       cancellationReason: appointment?.cancellationReason || "",
     },
   });
@@ -71,28 +71,28 @@ const AppointmentForm = ({
       if (type === "create" && patientId) {
         const appointmentData = {
           userId,
-          patient: patientId,
+          patientId: patientId,
           primaryPhysician: values.primaryPhysician,
-          schedule: new Date(values.schedule),
+          appointmentDate: new Date(values.schedule),
           reason: values.reason!,
           status: status as Status,
-          note: values.note,
+          notes: values.note,
         };
         const appointment = await CreateAppointment(appointmentData);
 
         if (appointment) {
           form.reset();
           router.push(
-            `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
+            `/patients/${userId}/new-appointment/success?appointmentId=${appointment.id}`
           );
         }
       } else {
         const appointmentToUpdate = {
           userId,
-          appointmentId: appointment?.$id!,
+          appointmentId: appointment?.id!,
           appointment: {
             primaryPhysician: values?.primaryPhysician,
-            schedule: new Date(values?.schedule),
+            appointmentDate: new Date(values?.schedule),
             status: status as Status,
             cancellationReason: values?.cancellationReason,
           },

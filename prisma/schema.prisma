@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  phone     String
+  name      String
+  patient   Patient?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Patient {
+  id                       String   @id @default(cuid())
+  userId                   String   @unique
+  user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                     String
+  email                    String
+  phone                    String
+  birthDate               String?
+  gender                  String?
+  address                 String?
+  occupation              String?
+  emergencyContactName    String?
+  emergencyContactNumber  String?
+  primaryPhysician        String?
+  insuranceProvider       String?
+  insurancePolicyNumber   String?
+  allergies               String?
+  currentMedication       String?
+  familyMedicalHistory    String?
+  pastMedicalHistory      String?
+  identificationDocumentId String?
+  identificationDocumentUrl String?
+  privacyConsent          Boolean  @default(false)
+  appointments            Appointment[]
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  @@index([userId])
+  @@index([email])
+}
+
+model Doctor {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  specialty String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Appointment {
+  id                String   @id @default(cuid())
+  patientId         String
+  patient           Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  primaryPhysician  String
+  reason            String
+  status            String   @default("pending")
+  notes             String?
+  cancellationReason String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  appointmentDate   DateTime?
+
+  @@index([patientId])
+  @@index([status])
+  @@index([appointmentDate])
+}

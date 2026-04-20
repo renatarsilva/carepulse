@@ -1,36 +1,52 @@
-import { Models } from "node-appwrite";
+// Types for Prisma models
+export type Gender = "male" | "female" | "other";
+export type Status = "pending" | "scheduled" | "cancelled";
 
-export interface Patient extends Models.Document {
+export interface Patient {
+  id: string;
   userId: string;
   name: string;
   email: string;
   phone: string;
-  birthDate: Date;
-  gender: Gender;
-  address: string;
-  occupation: string;
-  emergencyContactName: string;
-  emergencyContactNumber: string;
-  primaryPhysician: string;
-  insuranceProvider: string;
-  insurancePolicyNumber: string;
-  allergies: string | undefined;
-  currentMedication: string | undefined;
-  familyMedicalHistory: string | undefined;
-  pastMedicalHistory: string | undefined;
-  identificationType: string | undefined;
-  identificationNumber: string | undefined;
-  identificationDocument: FormData | undefined;
+  birthDate: string | null;
+  gender: string | null;
+  address: string | null;
+  occupation: string | null;
+  emergencyContactName: string | null;
+  emergencyContactNumber: string | null;
+  primaryPhysician: string | null;
+  insuranceProvider: string | null;
+  insurancePolicyNumber: string | null;
+  allergies: string | null;
+  currentMedication: string | null;
+  familyMedicalHistory: string | null;
+  pastMedicalHistory: string | null;
+  identificationDocumentId: string | null;
+  identificationDocumentUrl: string | null;
   privacyConsent: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export interface Appointment extends Models.Document {
-  patient: Patient;
-  schedule: Date;
-  status: Status;
+export interface Appointment {
+  id: string;
+  patientId: string;
+  patient?: Patient;
   primaryPhysician: string;
   reason: string;
-  note: string;
-  userId: string;
+  status: Status;
+  notes: string | null;
   cancellationReason: string | null;
+  appointmentDate: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
+
+export type User = {
+  id: string;
+  email: string;
+  phone: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

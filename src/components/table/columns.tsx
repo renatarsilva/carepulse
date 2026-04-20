@@ -35,7 +35,7 @@ export const columns: ColumnDef<Appointment>[] = [
     header: "Appointment",
     cell: ({ row }) => (
       <p className="text-14-regular min-w-[100px]">
-        {formatDateTime(row.original.schedule).dateTime}
+        {formatDateTime(row.original.appointmentDate!).dateTime}
       </p>
     ),
   },
@@ -69,15 +69,15 @@ export const columns: ColumnDef<Appointment>[] = [
         <div className="flex gap-1">
           <AppointmentModal
             type="schedule"
-            patientId={data?.patient?.$id}
-            userId={data.userId}
+            patientId={data.patientId}
+            userId={data.patient?.userId!}
             appointment={data}
           />
 
           <AppointmentModal
             type="cancel"
-            patientId={data?.patient?.$id}
-            userId={data.userId}
+            patientId={data.patientId}
+            userId={data.patient?.userId!}
             appointment={data}
           />
         </div>
