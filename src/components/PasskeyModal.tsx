@@ -18,6 +18,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { decryptKey, encryptKey } from "../../lib/utils";
+import { ADMIN_PASSKEY } from "@/lib/admin.config";
 
 const PasskeyModal = () => {
   const router = useRouter();
@@ -33,29 +34,34 @@ const PasskeyModal = () => {
 
   useEffect(() => {
     const accessKey = encryptedKey && decryptKey(encryptedKey);
-    console.log(accessKey);
+    console.log("Stored accessKey:", accessKey);
+    console.log("Admin passkey:", ADMIN_PASSKEY);
 
     if (path) {
-      if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
+      if (accessKey === ADMIN_PASSKEY) {
         setOpen(false);
         router.push("/admin");
       } else {
         setOpen(true);
       }
     }
-  }, [encryptedKey]);
+  }, [encryptedKey, path, router]);
 
   const validatePasskey = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
 
-    if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
+    console.log("Entered passkey:", passkey);
+    console.log("Expected passkey:", ADMIN_PASSKEY);
+
+    if (passkey === ADMIN_PASSKEY) {
       const encryptedKey = encryptKey(passkey);
 
       localStorage.setItem("accessKey", encryptedKey);
 
       setOpen(false);
+      router.push("/admin");
     } else {
       setError("Invalid passkey. Please try again.");
     }
