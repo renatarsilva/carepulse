@@ -15,9 +15,6 @@ COPY . .
 # Generate Prisma Client
 RUN npx prisma generate
 
-# Run database migrations
-RUN npx prisma migrate deploy
-
 # Build the application
 RUN npm run build
 
@@ -32,10 +29,14 @@ COPY package.json package-lock.json ./
 # Install only production dependencies
 RUN npm ci --only=production
 
-COPY --from=builder /app/prisma ./prisma
 # Copy built application from builder
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/prisma ./prisma
+
+# Copy entrypoint script
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Expose port 3000
 EXPOSE 3000
@@ -43,5 +44,5 @@ EXPOSE 3000
 # Set environment to production
 ENV NODE_ENV=production
 
-# Start the application
-CMD ["npm", "start"]
+# Use entrypoint script for migrations and startup
+ENTRYPOINT ["/app/entrypoint.sh"]
