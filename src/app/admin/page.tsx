@@ -9,7 +9,22 @@ import { columns } from "@/components/table/columns";
 export const dynamic = "force-dynamic";
 
 const Admin = async () => {
-  const appointments = await getRecentAppointmentList();
+  let appointments = null;
+  let error = null;
+
+  try {
+    appointments = await getRecentAppointmentList();
+  } catch (err) {
+    console.error("Error fetching appointments:", err);
+    error = "Failed to load appointments. Please check your database connection.";
+    appointments = {
+      totalCount: 0,
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+      documents: [],
+    };
+  }
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -26,6 +41,16 @@ const Admin = async () => {
 
         <p className="text-16-semibold">Admin Dashboard</p>
       </header>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          <p className="font-bold">Error</p>
+          <p>{error}</p>
+          <p className="text-sm mt-2">
+            Make sure PostgreSQL is running and DATABASE_URL is correctly configured in your .env file.
+          </p>
+        </div>
+      )}
 
       <main className="admin-main">
         <section className="w-full space-y-4">
